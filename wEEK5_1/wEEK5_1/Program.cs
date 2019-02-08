@@ -11,8 +11,7 @@ namespace wEEK5_1
         static void Main(string[] args)
         {
           int   i = 7;
-            int j = 5;
-            int m = 8;
+            
             Console.ReadLine();
         }
     }
