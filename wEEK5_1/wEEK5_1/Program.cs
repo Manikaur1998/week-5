@@ -8,9 +8,9 @@ namespace wEEK5_1
 {
     using System;
 
-    namespace FRI_FEB_8
-    {
-        class Program
+ 
+    
+  class Program
         {
             static void Main(string[] args)
             {
