@@ -1,80 +1,125 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace wEEK5_1
+namespace c0732134_Week05
 {
-    using System;
-
- 
-    
-  class Program
+    class Program
+    {
+        static void Main(string[] args)
         {
-            static void Main(string[] args)
-            {
-                Elevator e = new Elevator();
-                e.setup();
-                e.TraverseList();
-            }
-        }
+            //Elevator e = new Elevator();
+            //e.setup();
+            //e.makeTreeTraversalList();
 
-        class Node
-        {
-            public Node() { }
-            public Node elevatorUp;
-            public string FloorNumber;
-        }
-
-        class Department
-        {
-            public Department aDepartment;
-
-        }
-
-        class Elevator
-        {
-            Node Head;
-            Node FirstFloor;
-            Node SecondFloor;
-            Node ThirdFloor;
-            Node FourthFloor;
-
-            public void setup()
-            {
-                FirstFloor = new Node();
-                SecondFloor = new Node();
-                ThirdFloor = new Node();
-                FourthFloor = new Node();
-                Head = FirstFloor;
-                FirstFloor.FloorNumber = "First Floor";
-                FirstFloor.elevatorUp = SecondFloor;
-                SecondFloor.FloorNumber = "Second Floor";
-                SecondFloor.elevatorUp = ThirdFloor;
-                ThirdFloor.FloorNumber = "Third Floor";
-                ThirdFloor.elevatorUp = FourthFloor;
-                FourthFloor.FloorNumber = "Fourth Floor";
-                FourthFloor.elevatorUp = null;
-            }
-
-            public void TraverseList()
-            {
-                Node temp;
-                temp = Head;
-
-                // where am I going to start?
-
-                while (temp != null)
-                {
-                    Console.WriteLine(temp.FloorNumber);
-                    temp = temp.elevatorUp;
-
-                }
-
-            }
+            BubbleSort bs = new BubbleSort();
+            bs.run();
+            Console.ReadLine();
         }
     }
 
+    class Node
+    {
+        public Node() { }
+        public Node elevatorUp;
+        public string floorNumber;
+    }
 
-    
+    class Department
+    {
+        public Department(string deptName)
+        {
+            departmentDescription = deptName;
+        }
+        public Department nextDepartment;
+        public Department previousDepartment;
+        public string departmentDescription;
+    }
+
+    class DepartmentStore
+    {
+        public void initializeDepartments()
+        {
+            Department Kitchenware = new Department("Kitchenware");
+            Department Books = new Department("Books");
+
+            Kitchenware.nextDepartment = Books;
+            // Kitchenware.previousDepartment 
+
+        }
+    }
+
+    class BubbleSort
+    {
+        public void run()
+        {
+            int[] ar = new int[5] { 4, 5, 6, 2, 3 };
+            int mid = 0, temp = 0;
+
+            for (int i = 0; i < ar.Length; i++)
+            {
+
+                for (int j = 0; j < ar.Length - 1; j++)
+                {
+                    temp = 0;
+                    if (ar[j] > ar[j + 1])
+                    {
+                        temp = ar[j + 1];
+                        ar[j + 1] = ar[j];
+                        ar[j] = temp;
+                    }
+                }
+
+            }
+            for (int i = 0; i < ar.Length; i++)
+            {
+                Console.Write("{0} ", ar[i]);
+            }
+
+        }
+    }
+
+    class Elevator
+    {
+        public static Node head;
+        public static Node firstFloor;
+        public static Node secondFloor;
+        public static Node thirdFloor;
+        public static Node fourthFloor;
+
+        public void setup()
+        {
+            firstFloor = new Node();
+            secondFloor = new Node();
+            thirdFloor = new Node();
+            fourthFloor = new Node();
+
+            head = firstFloor;
+
+            firstFloor.floorNumber = "First Floor";
+            secondFloor.floorNumber = "Second Floor";
+            thirdFloor.floorNumber = "Third Floor";
+            fourthFloor.floorNumber = "Fourth Floor";
+
+            firstFloor.elevatorUp = secondFloor;
+            secondFloor.elevatorUp = thirdFloor;
+            thirdFloor.elevatorUp = fourthFloor;
+            fourthFloor.elevatorUp = null;
+
+
+            //Console.WriteLine("The Floor Number is : " + firstFloor.floorNumber);
+            //Console.WriteLine("The Floor Number is : " + secondFloor.floorNumber);
+            //Console.ReadLine();
+        }
+
+        public void makeTreeTraversalList()
+        {
+            Node temp;
+            temp = head;
+            while (temp != null)
+            {
+
+                Console.WriteLine(temp.floorNumber);
+                temp = temp.elevatorUp;
+            }
+        }
+    }
+}
